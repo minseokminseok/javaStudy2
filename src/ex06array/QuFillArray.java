@@ -12,62 +12,51 @@ import java.util.Scanner;
 public class QuFillArray {
 	
 	public static void main(String[] args) {	
-		
+	
 		//입력받은 정수를 순서대로 입력할 배열
 		int[] arr1 = new int[10];
-		
-		//홀,짝을 구분해서 입력할 배열 선언
+		//홀, 짝 구분해서 입력할 배열 선언
 		int[] arr2 = new int[10];
 		
 		Scanner scanner = new Scanner(System.in);
 		
-		//배열의 첫번째 인덱스와 마지막 인덱스를 변수에 저장한다. 
+		//배열의 첫번째 인덱스와 마지막 인덱스를 지정한다.
 		int indexStart = 0;
-		int indexEnd = arr2.length - 1;//배열의 크기가 변경될때 length를 통해 얻어올수 있다.
-		
+		//배열의 크기가 변경될 수 있으므로 length를 사용한다.
+		int indexEnd = arr2.length-1;
 		//배열의 크기만큼 반복해서 입력받는다.
-		for(int i=0 ; i<arr1.length ; i++) {
-			//정수를 입력받는다.
-			System.out.print("정수입력:");
+		for(int i=0; i<arr1.length; i++) {
+			System.out.print("정수입력");
 			int inputNum = scanner.nextInt();
-			
-			//첫번째 배열에는 입력한 순서대로 채운다.
+			//첫번째 배열은 입력한 순서대로 채워준다.
 			arr1[i] = inputNum;
-			
-			//두번째 배열은 홀/짝을 구분해서 채운다.
+			//두번째 배열은 홀,짝을 구분해서 앞, 뒤로 채운다.
 			if(inputNum%2==0) {
-				/*
-				만약 짝수라면 배열의 끝에서부터 채운다.	
-				값을 채워준후 인덱스를 1 차감한다. 			
-				 */
-				arr2[indexEnd--] = inputNum;//배열에 먼저 값이 채워진후 index가 감소한다.
-				//indexEnd--;
+				//짝수인 경우 뒤에서 채워준다.
+				arr2[indexEnd] =inputNum;
+				//인덱스를 1 차감해서 9,8,7,..과 같이 처리한다.
+				indexEnd--;
 			}
 			else {
-				/*
-				만약 홀수라면 배열의 앞에서부터 채운다.
-				값을 채워준후 인덱스를 1 증가한다.
-				 */
-				arr2[indexStart++] = inputNum;//배열에 먼저 값이 채워진후 index가 증가한다.
-				//indexStart++;
+				//홀수인 경우 앞에서부터 채워준다.
+				arr2[indexStart++] = inputNum;
+				//후위 연산하면 배열에 먼저 적용된 후에 증가되므로 
+				//한줄에 입력과 증가를 처리할 수 있다.
 			}
-			/*
-			증감연산자는 변수 앞에 위치할경우 해당 변수의 값이 먼저 변경된다. 
-			하지만 뒤에 위치할 경우 다른 코드가 먼저 실행된후 변수의 값이 뒤에 변경된다. 
-			따라서 위 증감되는 코드는 한줄로 줄일 수 있다. 
-			 */			
 		}
+		/*증감연산자는 변수 앞에 위치할 경우 해당 변수의 값이 먼저
+		 변경된다. 하지만 뒤에 위치할 경우 다른 코드가 먼저 실행된 후 
+		 변수의 값이 변경된다. */
 		
-		//첫번째 배열 출력
-		for(int i=0 ; i<arr1.length; i++) {
-			System.out.print(arr1[i]+" "); 
+		for(int i=0; i<arr1.length; i++) {
+			System.out.println(arr1[i]+ " ");
 		}
-		System.out.println();//배열 출력 후 줄바꿈 해준다.
-		//두번째 배열 출력
-		for(int i=0 ; i<arr1.length; i++) {
-			System.out.print(arr2[i]+" "); 
+		//배열 출력 후 줄바꿈 해준다.
+		System.out.println();
+		//두번째 배열
+		for(int a : arr2) {
+			System.out.println(a+" ");
 		}
 		
 	}
-
 }
